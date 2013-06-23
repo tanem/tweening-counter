@@ -4,8 +4,6 @@
 
 An animated JavaScript counter.
 
-![](https://raw.github.com/tanem/counter/master/screenshot.png)
-
 ## Dependencies
 
  * [Node.js](http://nodejs.org/)

@@ -4,7 +4,7 @@
 
 An animated JavaScript counter.
 
-![](https://raw.github.com/tanem/realtime-dashboard-hits-graph/master/screenshot.png)
+![](https://raw.github.com/tanem/counter/master/screenshot.png)
 
 ## Dependencies
 

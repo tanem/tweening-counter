@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Counter Demo | Realtime Dashboard</title>
+  <style type="text/css">
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+  }
+
+  .counter {
+    font-size: 120px;
+    height: 200px;
+    left: 50%;
+    line-height: 200px;
+    margin-left: -100px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 200px;
+  }
+  </style>
+</head>
+<body>
+  <div class="counter"></div>
+  <script src="../src/counter.js"></script>
+  <script>
+  (function(){
+
+    // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+    window.requestAnimFrame = (function(){
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function(callback){
+          window.setTimeout(callback, 1000 / 60);
+        };
+    })();
+
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Example:_Using_Math.random
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var counter = new Counter({
+      el: document.getElementsByClassName('counter')[0],
+      durationVal: 3
+    });
+
+    // Runs the counter towards a random int between 0 and 100,
+    // with a delay of between 0.5s and 2s between each run.
+    function run(counter) {
+      var start = null;
+      var delay = getRandomInt(500, 2000);
+      counter
+        .finish(getRandomInt(0, 50))
+        .run(function loop() {
+          start = start || Date.now();
+          var now = Date.now();
+          if (now - start >= delay) {
+            start = null;
+            return run(counter);
+          }  
+          requestAnimFrame(loop);
+        });
+    }
+
+    run(counter)
+
+  }());
+  </script>
+</body>
+</html>

@@ -1,21 +1,14 @@
-(function(){
+;(function(global){
 
   // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-  window.requestAnimFrame = (function(){
-    return window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
+  global.requestAnimFrame = (function(){
+    return global.requestAnimationFrame ||
+      global.webkitRequestAnimationFrame ||
+      global.mozRequestAnimationFrame ||
       function(callback){
-        window.setTimeout(callback, 1000 / 60);
+        global.setTimeout(callback, 1000 / 60);
       };
   })();
-
-  // http://www.gizma.com/easing/#cub2
-  var easeOutCubic = function(t, b, c, d){
-    t /= d;
-    t--;
-    return c*(t*t*t + 1) + b;
-  };
 
   // Copies source object properties onto target. 
   function extend(target) {
@@ -31,7 +24,14 @@
     return Object.prototype.toString.call(obj) === '[object Function]';
   }
 
-  window.Counter = function Counter(opts) {
+  // http://www.gizma.com/easing/#cub2
+  var easeOutCubic = function(t, b, c, d){
+    t /= d;
+    t--;
+    return c*(t*t*t + 1) + b;
+  };
+
+  global.Counter = function Counter(opts) {
     opts = opts || {};
     extend(this, {
       el: null,
@@ -87,4 +87,4 @@
       (this.delta === 0));
   };
 
-}());
+}(this));

@@ -3,3 +3,4 @@ node_modules
 libpeerconnection.log
 _coverage
 _dist
+bower_components

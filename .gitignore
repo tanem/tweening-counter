@@ -1,4 +1,5 @@
 .DS_Store
 node_modules
-SpecRunner.html
-.grunt
+libpeerconnection.log
+_coverage
+_dist

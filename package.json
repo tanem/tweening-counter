@@ -1,6 +1,6 @@
 {
   "name": "Counter",
-  "description": "An animated counter.",
+  "description": "An animated JavaScript counter.",
   "version": "1.0.0",
   "author": {
     "name": "Tane Morgan",

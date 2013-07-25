@@ -9,3 +9,4 @@ branches:
 
 before_script:
   - npm install -g grunt-cli bower
+  - bower install

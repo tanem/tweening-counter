@@ -26,6 +26,6 @@
     "grunt-contrib-uglify": "~0.2.2"
   },
   "scripts": {
-    "test": "grunt test:headless"
+    "test": "grunt karma:headless"
   }
 }

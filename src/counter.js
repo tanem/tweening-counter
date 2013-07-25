@@ -1,46 +1,19 @@
-;(function(global){
+;(function(){
 
-  // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-  global.requestAnimFrame = (function(){
-    return global.requestAnimationFrame ||
-      global.webkitRequestAnimationFrame ||
-      global.mozRequestAnimationFrame ||
-      function(callback){
-        global.setTimeout(callback, 1000 / 60);
-      };
-  })();
+  'use strict';
 
-  // Copies source object properties onto target. 
-  function extend(target) {
-    var sourceObjects = Array.prototype.slice.call(arguments, 1);
-    sourceObjects.forEach(function(object){
-      Object.keys(object).forEach(function(key){
-        target[key] = object[key];
-      });
-    });
-  }
+  window.requestAnimFrame = Modernizr.prefixed('requestAnimationFrame', window);
 
-  function isFunction(obj) {
-    return Object.prototype.toString.call(obj) === '[object Function]';
-  }
-
-  // http://www.gizma.com/easing/#cub2
-  var easeOutCubic = function(t, b, c, d){
-    t /= d;
-    t--;
-    return c*(t*t*t + 1) + b;
-  };
-
-  global.Counter = function Counter(opts) {
+  var Counter = window.Counter = function Counter(opts) {
     opts = opts || {};
-    extend(this, {
-      el: null,
+    _.extend(this, {
+      $el: null,
       durationVal: 3,
       startVal: 0,
       finishVal: 0,
-      timingFunction: easeOutCubic
+      timingFunction: $.easing.easeOutCubic
     }, opts);
-    if (!this.el) throw new Error ('el must be defined');
+    if (!this.$el) throw new Error ('$el must be defined');
     this._animate = this._animate.bind(this);
   };
 
@@ -63,22 +36,22 @@
     this.delta = this.finishVal - this.startVal;
     this.beginning = Date.now();
     this.cb = cb;
-    requestAnimFrame(this._animate);
+    window.requestAnimFrame(this._animate);
   };
 
   Counter.prototype._animate = function(){
     var elapsed = (Date.now() - this.beginning) / 1000;
-    var count = this.timingFunction(elapsed, this.startVal, this.delta, this.durationVal);
+    var count = this.timingFunction(null, elapsed, this.startVal, this.delta, this.durationVal);
     var roundedCount = Math.round(count);
     if (this._hasReachedFinish(roundedCount)) {
-      this.el.textContent = this.finishVal;
+      this.$el.text(this.finishVal);
       this.startVal = this.finishVal;
-      if (isFunction(this.cb)) this.cb();
+      if (_.isFunction(this.cb)) this.cb();
       return;
     } else {
-      this.el.textContent = roundedCount;
+      this.$el.text(roundedCount);
     }
-    requestAnimFrame(this._animate);
+    window.requestAnimFrame(this._animate);
   };
 
   Counter.prototype._hasReachedFinish = function(roundedCount){
@@ -87,4 +60,4 @@
       (this.delta === 0));
   };
 
-}(this));
+}());

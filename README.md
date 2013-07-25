@@ -8,25 +8,42 @@ An animated JavaScript counter.
 
  * [Node.js](http://nodejs.org/)
  * [npm](https://npmjs.org/)
- 
-Installing:
 
+Install global dependencies:
+
+    $ npm install -g grunt-cli bower
+
+Install local dependencies:
+    
     $ npm install
-
-## Start
-
-To run the unit tests then watch the required files for changes:
-
-    $ grunt start
+    $ bower install
 
 ## Demo
 
     $ open demo/index.html
 
+## Dev Start
+
+To run the unit tests with code coverage, then watch the required files for changes:
+
+    $ grunt start
+
 ## Unit Testing
 
-To run via [PhantomJS](http://phantomjs.org/):
+[Karma](http://karma-runner.github.io/0.8/index.html) is used to run the unit tests against various browsers and to provide code coverage via [Istanbul](https://github.com/gotwarlost/istanbul). Check the `karma` task config in `Gruntfile.js` for details on browsers covered.
+
+To run unit tests only:
 
     $ grunt test
 
-That will also generate `./SpecRunner.html`, which can be used to view the tests in the browser.
+To run with code coverage:
+
+    $ grunt cover
+
+The code coverage report is output to `_coverage`.
+
+## Dist
+
+A minified version of the source file is output to `_dist` via:
+
+    $ grunt dist

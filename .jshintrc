@@ -6,9 +6,6 @@
   "undef": true,
   "trailing": true,
   "globals": {
-    "Modernizr": false,
-    "_": false,
-    "$": false,
     "describe": false,
     "beforeEach": false,
     "afterEach": false,

@@ -1,5 +1,7 @@
 describe('Counter', function(){
 
+  'use strict';
+
   var counter;
 
   beforeEach(function(){
@@ -7,11 +9,11 @@ describe('Counter', function(){
     var div = document.createElement('div');
     div.className = 'counter';
 
-    counter = new Counter({
+    counter = new window.Counter({
       el: div
     });
 
-  }); 
+  });
 
   it('should have a default start value of 0', function(){
     expect(counter.startVal).toBe(0);
@@ -21,13 +23,13 @@ describe('Counter', function(){
     expect(counter.finishVal).toBe(0);
   });
 
-  it('should have a default duration of 3s', function(){      
+  it('should have a default duration of 3s', function(){
     expect(counter.durationVal).toBe(3);
   });
 
   it('should throw an error if el is not defined', function(){
     expect(function(){
-      counter = new Counter();
+      counter = new window.Counter();
     }).toThrow('el must be defined');
   });
 

@@ -1,7 +1,9 @@
 ;(function(global){
 
+  'use strict';
+
   // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-  global.requestAnimFrame = (function(){
+  var requestAnimFrame = global.requestAnimFrame = (function(){
     return global.requestAnimationFrame ||
       global.webkitRequestAnimationFrame ||
       global.mozRequestAnimationFrame ||
@@ -31,7 +33,7 @@
     return c*(t*t*t + 1) + b;
   };
 
-  global.Counter = function Counter(opts) {
+  var Counter = global.Counter = function Counter(opts) {
     opts = opts || {};
     extend(this, {
       el: null,

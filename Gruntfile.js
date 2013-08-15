@@ -36,7 +36,7 @@ module.exports = function(grunt){
 
     watch: {
       files: ['<%= meta.src %>', '<%= meta.test %>'],
-      tasks: ['jshint', 'cover']
+      tasks: ['jshint', 'test']
     },
 
     karma: {
@@ -77,7 +77,7 @@ module.exports = function(grunt){
 
   grunt.registerTask('test', ['karma:test']);
   grunt.registerTask('cover', ['clean:coverage', 'karma:cover']);
-  grunt.registerTask('start', ['cover', 'watch']);
+  grunt.registerTask('start', ['test', 'watch']);
   grunt.registerTask('dist', ['clean:dist', 'jshint', 'test', 'uglify:dist']);
 
 };

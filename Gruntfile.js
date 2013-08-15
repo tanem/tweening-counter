@@ -42,21 +42,20 @@ module.exports = function(grunt){
     karma: {
       options: {
         configFile: 'karma.conf.js',
-        runnerPort: 9100,
         background: false,
         singleRun: true
       },
       headless: {
         browsers: ['PhantomJS'],
-        reporters: ['dots']
+        reporters: ['progress']
       },
       test: {
         browsers: ['Chrome', 'Firefox', 'PhantomJS'],
-        reporters: ['dots']
+        reporters: ['progress']
       },
       cover: {
         browsers: ['Chrome', 'Firefox', 'PhantomJS'],
-        reporters: ['dots', 'coverage'],
+        reporters: ['progress', 'coverage'],
         coverageReporter: {
           type: 'html',
           dir: '_coverage'

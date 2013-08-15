@@ -8,4 +8,4 @@ branches:
     - master
 
 before_script:
-  - npm install -g grunt-cli bower
+  - npm install -g grunt-cli

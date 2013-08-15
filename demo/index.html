@@ -24,15 +24,19 @@
 </head>
 <body>
   <div class="counter"></div>
-  <script src="../bower_components/modernizr/modernizr.js"></script>
-  <script src="../bower_components/lodash/lodash.js"></script>
-  <script src="../bower_components/jquery/jquery.js"></script>
-  <script src="../bower_components/jquery-easing/jquery.easing.js"></script>
   <script src="../src/counter.js"></script>
   <script>
   (function(){
 
-    window.requestAnimFrame = Modernizr.prefixed('requestAnimationFrame', window);
+    // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+    window.requestAnimFrame = (function(){
+      return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function(callback){
+          window.setTimeout(callback, 1000 / 60);
+        };
+    })();
 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Example:_Using_Math.random
     function getRandomInt(min, max) {
@@ -40,7 +44,7 @@
     }
 
     var counter = new Counter({
-      $el: $('.counter'),
+      el: document.querySelector('.counter'),
       durationVal: 3
     });
 

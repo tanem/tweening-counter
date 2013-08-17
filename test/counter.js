@@ -48,8 +48,46 @@ describe('Counter', function(){
     expect(counter.durationVal).toBe(5);
   });
 
+  it('should default to the correct duration value if an explicit value is not passed', function(){
+    counter.duration();
+    expect(counter.durationVal).toBe(3);
+  });
+
+  describe('Run:', function(){
+
+    beforeEach(function(){
+      spyOn(window, 'requestAnimFrame');
+      spyOn(Date, 'now').andReturn(1000);
+    });
+
+    it('should set the correct delta value', function(){
+      counter
+        .start(5)
+        .finish(10)
+        .run();
+      expect(counter.delta).toBe(5);
+    });
+
+    it('should set the beginning value to the current time', function(){
+      counter.run();
+      expect(counter.beginning).toBe(1000);
+    });
+
+    it('should set the finish callback correctly', function(){
+      var cb = function(){};
+      counter.run(cb);
+      expect(counter.cb).toBe(cb);
+    }); 
+
+    it('should start the animation via requestAnimFrame', function(){
+      counter.run();
+      expect(window.requestAnimFrame).toHaveBeenCalledWith(counter._animate);
+    });
+
+  });
+
   describe('Animate:', function(){
-    
+
     beforeEach(function(){
       spyOn(window, 'requestAnimFrame');
       spyOn(counter, 'timingFunction').andCallThrough();

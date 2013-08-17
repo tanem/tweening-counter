@@ -3,7 +3,7 @@
   'use strict';
 
   // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-  var requestAnimFrame = global.requestAnimFrame = (function(){
+  global.requestAnimFrame = (function(){
     return global.requestAnimationFrame ||
       global.webkitRequestAnimationFrame ||
       global.mozRequestAnimationFrame ||
@@ -65,7 +65,7 @@
     this.delta = this.finishVal - this.startVal;
     this.beginning = Date.now();
     this.cb = cb;
-    requestAnimFrame(this._animate);
+    global.requestAnimFrame(this._animate);
   };
 
   Counter.prototype._animate = function(){
@@ -80,7 +80,7 @@
     } else {
       this.el.textContent = roundedCount;
     }
-    requestAnimFrame(this._animate);
+    global.requestAnimFrame(this._animate);
   };
 
   Counter.prototype._hasReachedFinish = function(roundedCount){

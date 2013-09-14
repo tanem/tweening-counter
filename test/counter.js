@@ -77,7 +77,7 @@ describe('Counter', function(){
       var cb = function(){};
       counter.run(cb);
       expect(counter.cb).toBe(cb);
-    }); 
+    });
 
     it('should start the animation via requestAnimFrame', function(){
       counter.run();

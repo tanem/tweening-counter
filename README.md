@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tanem/counter.png?branch=master)](https://travis-ci.org/tanem/counter)
 
-An animated JavaScript counter.
+A JavaScript counter that uses timing functions to move towards it's destination.
 
 ## Example
 

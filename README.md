@@ -1,6 +1,6 @@
 # Counter
 
-[![Build Status](https://travis-ci.org/tanem/counter.png?branch=master)](https://travis-ci.org/tanem/counter)
+[![Build Status](https://travis-ci.org/tanem/tweening-counter.png?branch=master)](https://travis-ci.org/tanem/tweening-counter)
 
 A JavaScript counter that uses timing functions to move towards it's destination.
 

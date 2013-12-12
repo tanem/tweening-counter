@@ -6,7 +6,7 @@ A JavaScript counter that uses timing functions to move towards it's destination
 
 ## Example
 
-Open `example/index.html` in a browser.
+Check out the demo on [CodePen](http://codepen.io/tanem/details/AaxDd), or open `example/index.html` in a browser.
 
 ## Development
 

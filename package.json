@@ -1,18 +1,18 @@
 {
-  "name": "Counter",
-  "description": "An animated counter.",
-  "version": "1.0.1",
+  "name": "tweening-counter",
+  "description": "A JavaScript counter that uses timing functions to move towards it's destination.",
+  "version": "1.0.0",
   "author": {
     "name": "Tane Morgan",
     "url": "http://github.com/tanem"
   },
-  "homepage": "http://github.com/tanem/counter",
+  "homepage": "http://github.com/tanem/tweening-counter",
   "repository": {
     "type": "git",
-    "url": "http://github.com/tanem/counter.git"
+    "url": "http://github.com/tanem/tweening-counter.git"
   },
   "bugs": {
-    "url": "http://github.com/tanem/counter/issues"
+    "url": "http://github.com/tanem/tweening-counter/issues"
   },
   "engines": {
     "node": ">=0.10.13"

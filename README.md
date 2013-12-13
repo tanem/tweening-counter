@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tanem/tweening-counter.png?branch=master)](https://travis-ci.org/tanem/tweening-counter)
 
-A JavaScript counter that uses timing functions to move towards it's destination.
+A JavaScript counter that uses a timing function to move towards it's destination.
 
 ## Example
 

@@ -2,13 +2,13 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Counter Demo</title>
+  <title>Tweening Counter Demo</title>
   <style type="text/css">
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
-  .counter {
+  .tweening-counter {
     font-size: 120px;
     height: 200px;
     left: 50%;
@@ -23,8 +23,8 @@
   </style>
 </head>
 <body>
-  <div class="counter"></div>
-  <script src="../src/counter.js"></script>
+  <div class="tweening-counter"></div>
+  <script src="../src/tweening-counter.js"></script>
   <script>
   (function(){
 
@@ -43,30 +43,30 @@
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    var counter = new Counter({
-      el: document.querySelector('.counter'),
+    var tweeningCounter = new TweeningCounter({
+      el: document.querySelector('.tweening-counter'),
       durationVal: 3
     });
 
-    // Runs the counter towards a random int between 0 and 50,
+    // Runs the tweening counter towards a random int between 0 and 50,
     // with a delay of between 0.5s and 2s between each run.
-    function run(counter) {
+    function run(tweeningCounter) {
       var start = null;
       var delay = getRandomInt(500, 2000);
-      counter
+      tweeningCounter
         .finish(getRandomInt(0, 50))
         .run(function loop() {
           start = start || Date.now();
           var now = Date.now();
           if (now - start >= delay) {
             start = null;
-            return run(counter);
+            return run(tweeningCounter);
           }  
           requestAnimFrame(loop);
         });
     }
 
-    run(counter)
+    run(tweeningCounter)
 
   }());
   </script>

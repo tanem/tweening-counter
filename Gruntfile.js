@@ -29,7 +29,7 @@ module.exports = function(grunt){
     uglify: {
       dist: {
         files: {
-          '_dist/counter.min.js': '<%= meta.src %>'
+          '_dist/tweening-counter.min.js': '<%= meta.src %>'
         }
       }
     },

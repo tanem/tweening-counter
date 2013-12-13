@@ -33,7 +33,7 @@
     return c*(t*t*t + 1) + b;
   };
 
-  var Counter = global.Counter = function Counter(opts) {
+  var TweeningCounter = global.TweeningCounter = function TweeningCounter(opts) {
     opts = opts || {};
     extend(this, {
       el: null,
@@ -46,29 +46,29 @@
     this._animate = this._animate.bind(this);
   };
 
-  Counter.prototype.start = function(val){
+  TweeningCounter.prototype.start = function(val){
     this.startVal = val;
     return this;
   };
 
-  Counter.prototype.finish = function(val){
+  TweeningCounter.prototype.finish = function(val){
     this.finishVal = val;
     return this;
   };
 
-  Counter.prototype.duration = function(val){
+  TweeningCounter.prototype.duration = function(val){
     this.durationVal = val || this.durationVal;
     return this;
   };
 
-  Counter.prototype.run = function(cb){
+  TweeningCounter.prototype.run = function(cb){
     this.delta = this.finishVal - this.startVal;
     this.beginning = Date.now();
     this.cb = cb;
     global.requestAnimFrame(this._animate);
   };
 
-  Counter.prototype._animate = function(){
+  TweeningCounter.prototype._animate = function(){
     var elapsed = (Date.now() - this.beginning) / 1000;
     var count = this.timingFunction(elapsed, this.startVal, this.delta, this.durationVal);
     var roundedCount = Math.round(count);
@@ -83,7 +83,7 @@
     global.requestAnimFrame(this._animate);
   };
 
-  Counter.prototype._hasReachedFinish = function(roundedCount){
+  TweeningCounter.prototype._hasReachedFinish = function(roundedCount){
     return ((this.delta < 0 && roundedCount <= this.finishVal) ||
       (this.delta > 0 && roundedCount >= this.finishVal) ||
       (this.delta === 0));

@@ -12,9 +12,10 @@ Check out the demo on [CodePen](http://codepen.io/tanem/details/AaxDd), or open 
 
 ### Dependencies
 
-Ensure the following is installed:
+Ensure the following are installed:
 
  * [Node.js](http://nodejs.org/)
+ * [PhantomJS](http://phantomjs.org/)
 
 Install global dependencies:
 
@@ -34,7 +35,7 @@ To run the unit tests with code coverage, then watch the required files for chan
 
 #### Unit Testing
 
-[Karma](http://karma-runner.github.io/0.8/index.html) is used to run the unit tests against various browsers and to provide code coverage via [Istanbul](https://github.com/gotwarlost/istanbul). Check the `karma` task config in `Gruntfile.js` for details on browsers covered.
+[Karma](http://karma-runner.github.io/0.10/index.html) is used to run the unit tests against various browsers and to provide code coverage via [Istanbul](https://github.com/gotwarlost/istanbul). Check the `karma` task config in `Gruntfile.js` for details on browsers covered.
 
 To run unit tests only:
 

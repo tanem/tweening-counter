@@ -1,4 +1,4 @@
-# Counter
+# Tweening Counter
 
 [![Build Status](https://travis-ci.org/tanem/tweening-counter.png?branch=master)](https://travis-ci.org/tanem/tweening-counter)
 

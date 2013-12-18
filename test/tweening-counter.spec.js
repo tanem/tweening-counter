@@ -1,3 +1,4 @@
+var raf = require('raf');
 var TweeningCounter = require('tweening-counter');
 
 describe('Tweening counter', function(){
@@ -55,20 +56,30 @@ describe('Tweening counter', function(){
     expect(log.args.duration[0][0]).to.be(2000);
   });
 
-  it('should allow setting of the onComplete function', function(){
-    var fn = function(){};
-    tweeningCounter.tween.once = spooks.fn({
-      name: 'once',
+  it('should allow addition of an onEnd callback', function(){
+    var spy = spooks.fn({
+      name: 'spy',
       log: log
     });
-    tweeningCounter.onComplete(fn);
-    expect(log.args.once[0][0]).to.be('end');
-    expect(log.args.once[0][1]).to.be(fn);
+    tweeningCounter.onEnd(spy);
+    tweeningCounter.tween.emit('end');
+    expect(log.counts.spy).to.be(1);
   });
 
   it('should update the el text on tween update', function(){
     tweeningCounter.update({ val: 2 });
     expect(tweeningCounter.el.textContent).to.be('2');
+  });
+
+  it('should cancel the latest raf callback on end', function(){
+    raf.cancel = spooks.fn({
+      name: 'cancel',
+      log: log
+    });
+    // Set a fake rafId.
+    tweeningCounter.rafId = 1;
+    tweeningCounter.tween.emit('end');
+    expect(log.args.cancel[0][0]).to.be(1);
   });
 
 });

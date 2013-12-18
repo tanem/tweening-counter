@@ -2,7 +2,7 @@
   "name": "tweening-counter",
   "repo": "tanem/tweening-counter",
   "description": "A JavaScript counter that uses a timing function to move towards it's destination.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "keywords": [
     "tweening",
     "counter"

@@ -21,7 +21,7 @@ This library may be used stand-alone without the component tool, simply add ./tw
 
 ## Live Demo
 
-Check out [CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.
+[Check out the live demo on CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.
 
 ## API
 

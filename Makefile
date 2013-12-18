@@ -1,7 +1,7 @@
-build: components index.js
+build: components
 	@component build --dev
 
-components: component.json
+components:
 	@component install --dev
 
 clean:
@@ -10,7 +10,7 @@ clean:
 test: build
 	@mocha-phantomjs -R dot test/index.html
 
-tweening-counter.js: index.js components
+tweening-counter.js: components
 	@component build --standalone tweening-counter --out . --name tweening-counter
 
 tweening-counter.min.js: tweening-counter.js

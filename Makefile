@@ -1,4 +1,4 @@
-build: components
+build: tweening-counter.min.js
 	@component build --dev
 
 components:

@@ -1,5 +1,2 @@
-.DS_Store
-node_modules
-libpeerconnection.log
-_coverage
-_dist
+components
+build

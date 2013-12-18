@@ -11,7 +11,7 @@ test: build
 	@mocha-phantomjs -R dot test/index.html
 
 tweening-counter.js: components
-	@component build --standalone tweening-counter --out . --name tweening-counter
+	@component build --standalone TweeningCounter --out . --name tweening-counter
 
 tweening-counter.min.js: tweening-counter.js
 	@uglifyjs $< > $@

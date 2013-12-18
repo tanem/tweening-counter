@@ -986,5 +986,5 @@ require.alias("tweening-counter/index.js", "tweening-counter/index.js");if (type
 } else if (typeof define == "function" && define.amd) {
   define(function(){ return require("tweening-counter"); });
 } else {
-  this["tweening-counter"] = require("tweening-counter");
+  this["TweeningCounter"] = require("tweening-counter");
 }})();

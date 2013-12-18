@@ -28,6 +28,7 @@
   <script>
   (function(){
     
+    var bind = require('bind');
     var raf = require('raf');
     var random = require('random');
     var TweeningCounter = require('tweening-counter');
@@ -38,6 +39,16 @@
       .duration(3000)
       .onEnd(loop);
 
+    function loop() {
+      start = start || Date.now();
+      var now = Date.now();
+      if (now - start >= delay) {
+        start = null;
+        return run(this);
+      }  
+      raf(bind(this, loop));
+    }
+
     // Runs the tweening counter towards a random int between 0 and 50,
     // with a delay of between 0.5s and 2s between each run.
     function run(tweeningCounter) {
@@ -46,16 +57,6 @@
       tweeningCounter
         .to(random(0, 50, true))
         .start();
-    }
-
-    function loop() {
-      start = start || Date.now();
-      var now = Date.now();
-      if (now - start >= delay) {
-        start = null;
-        return run(tweeningCounter);
-      }  
-      raf(loop);
     }
 
     run(tweeningCounter);

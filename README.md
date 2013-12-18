@@ -56,7 +56,7 @@ tweeningCounter.duration(1000)
 
 ### TweeningCounter#onEnd(fn:Function)
 
-Add an `end` event handler.
+Add an `end` event handler bound to this `TweeningCounter`.
 
 ```js
 tweeningCounter.onEnd(function(){})

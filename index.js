@@ -86,7 +86,7 @@ TweeningCounter.prototype.duration = function(ms){
 };
 
 /**
- * Add an `end` event handler.
+ * Add an `end` event handler bound to this `TweeningCounter`.
  *
  * ```js
  * tweeningCounter.onEnd(function(){})
@@ -98,7 +98,7 @@ TweeningCounter.prototype.duration = function(ms){
  */
 
 TweeningCounter.prototype.onEnd = function(fn){
-  if (isfunction(fn)) this.tween.on('end', fn);
+  if (isfunction(fn)) this.tween.on('end', bind(this, fn));
   return this;
 };
 

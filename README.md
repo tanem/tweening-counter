@@ -19,6 +19,10 @@ This library may be used stand-alone without the component tool, simply add ./tw
 16K tweening-counter.min.js
 ```
 
+## Live Demo
+
+Check out [CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.
+
 ## API
 
 ### new TweeningCounter(el:Element)

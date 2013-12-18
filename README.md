@@ -1,54 +1,71 @@
-# Tweening Counter
-
-[![Build Status](https://travis-ci.org/tanem/tweening-counter.png?branch=master)](https://travis-ci.org/tanem/tweening-counter)
+# tweening-counter
 
 A JavaScript counter that uses a timing function to move towards it's destination.
 
-## Example
+## Installation
 
-Check out the demo on [CodePen](http://codepen.io/tanem/details/AaxDd), or open `example/index.html` in a browser.
+Install with [component(1)](http://component.io):
 
-## Development
+```sh
+$ component install tanem/tweening-counter
+```
 
-### Dependencies
+## Stand-alone
 
-Ensure the following are installed:
+This library may be used stand-alone without the component tool, simply add ./tweening-counter.js to your application and reference the `TweeningCounter` global. With all its dependencies tweening-counter is the following size:
 
- * [Node.js](http://nodejs.org/)
- * [PhantomJS](http://phantomjs.org/)
+```
+24K tweening-counter.js
+16K tweening-counter.min.js
+```
 
-Install global dependencies:
+## API
 
-    $ npm install -g grunt-cli
+### new TweeningCounter(el:Element)
 
-Install local dependencies:
-    
-    $ npm install
+Initialize a new `TweeningCounter` with the given `el`.
 
-### Grunt Tasks
+### .to(val:Number)
 
-#### Start
+Set the value to tween to.
 
-To run the unit tests with code coverage, then watch the required files for changes:
+```js
+tweeningCounter.to(50)
+```
 
-    $ grunt start
+### TweeningCounter#ease(fn:String|Function)
 
-#### Unit Testing
+Set the easing function.
 
-[Karma](http://karma-runner.github.io/0.10/index.html) is used to run the unit tests against various browsers and to provide code coverage via [Istanbul](https://github.com/gotwarlost/istanbul). Check the `karma` task config in `Gruntfile.js` for details on browsers covered.
+```js
+tweeningCounter.ease('in-out-sine')
+tweeningCounter.ease(function(){})
+```
 
-To run unit tests only:
+### TweeningCounter#duration(ms:Number)
 
-    $ grunt test
+Set the easing duration.
 
-To run with code coverage:
+```js
+tweeningCounter.duration(1000)
+```
 
-    $ grunt cover
+### TweeningCounter#onComplete(fn:Function)
 
-The code coverage report is output to `_coverage`.
+Set the function to execute on completion.
 
-#### Dist
+```js
+tweeningCounter.onComplete(function(){})
+```
 
-A minified version of the source file is output to `_dist` via:
+### TweeningCounter#start
 
-    $ grunt dist
+Start the counter.
+
+```js
+tweeningCounter.start()
+```
+
+## License
+
+MIT

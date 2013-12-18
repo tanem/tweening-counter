@@ -24,49 +24,36 @@
 </head>
 <body>
   <div class="tweening-counter"></div>
-  <script src="../src/tweening-counter.js"></script>
+  <script src="../build/build.js"></script>
   <script>
   (function(){
+    
+    var raf = require('raf');
+    var random = require('random');
+    var TweeningCounter = require('tweening-counter');
 
-    // http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
-    window.requestAnimFrame = (function(){
-      return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        function(callback){
-          window.setTimeout(callback, 1000 / 60);
-        };
-    })();
-
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Example:_Using_Math.random
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    var tweeningCounter = new TweeningCounter({
-      el: document.querySelector('.tweening-counter'),
-      durationVal: 3
-    });
+    var tweeningCounter = new TweeningCounter(document.querySelector('.tweening-counter')).duration(3000);
 
     // Runs the tweening counter towards a random int between 0 and 50,
     // with a delay of between 0.5s and 2s between each run.
     function run(tweeningCounter) {
       var start = null;
-      var delay = getRandomInt(500, 2000);
+      var delay = random(500, 2000, true);
       tweeningCounter
-        .finish(getRandomInt(0, 50))
-        .run(function loop() {
+        .to(random(0, 50, true))
+        .onComplete(function loop() {
           start = start || Date.now();
           var now = Date.now();
           if (now - start >= delay) {
             start = null;
             return run(tweeningCounter);
           }  
-          requestAnimFrame(loop);
-        });
+          raf(loop);
+        })
+        .start();
     }
 
-    run(tweeningCounter)
+    run(tweeningCounter);
 
   }());
   </script>

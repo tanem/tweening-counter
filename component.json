@@ -1,0 +1,31 @@
+{
+  "name": "tweening-counter",
+  "repo": "tanem/tweening-counter",
+  "description": "A JavaScript counter that uses a timing function to move towards it's destination.",
+  "version": "1.0.0",
+  "keywords": [
+    "tweening",
+    "counter"
+  ],
+  "dependencies": {
+    "component/raf": "*",
+    "segmentio/extend": "*",
+    "techjacker/isfunction": "*",
+    "component/bind": "*",
+    "component/tween": "*",
+    "component/ease": "*"
+  },
+  "development": {
+    "danzajdband/random": "*",
+    "techjacker/expect.js": "*",
+    "philbooth/spooks.js": "*",
+    "visionmedia/mocha": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "demo": "http://codepen.io/tanem/pen/AaxDd",
+  "remotes": []
+}

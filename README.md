@@ -25,7 +25,7 @@ This library may be used stand-alone without the component tool, simply add ./tw
 
 Initialize a new `TweeningCounter` with the given `el`.
 
-### .to(val:Number)
+### TweeningCounter#to(val:Number)
 
 Set the value to tween to.
 

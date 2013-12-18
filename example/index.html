@@ -32,25 +32,30 @@
     var random = require('random');
     var TweeningCounter = require('tweening-counter');
 
-    var tweeningCounter = new TweeningCounter(document.querySelector('.tweening-counter')).duration(3000);
+    var start, delay;
+
+    var tweeningCounter = new TweeningCounter(document.querySelector('.tweening-counter'))
+      .duration(3000)
+      .onEnd(loop);
 
     // Runs the tweening counter towards a random int between 0 and 50,
     // with a delay of between 0.5s and 2s between each run.
     function run(tweeningCounter) {
-      var start = null;
-      var delay = random(500, 2000, true);
+      start = null;
+      delay = random(500, 2000, true);
       tweeningCounter
         .to(random(0, 50, true))
-        .onComplete(function loop() {
-          start = start || Date.now();
-          var now = Date.now();
-          if (now - start >= delay) {
-            start = null;
-            return run(tweeningCounter);
-          }  
-          raf(loop);
-        })
         .start();
+    }
+
+    function loop() {
+      start = start || Date.now();
+      var now = Date.now();
+      if (now - start >= delay) {
+        start = null;
+        return run(tweeningCounter);
+      }  
+      raf(loop);
     }
 
     run(tweeningCounter);

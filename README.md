@@ -54,12 +54,12 @@ Set the easing duration.
 tweeningCounter.duration(1000)
 ```
 
-### TweeningCounter#onComplete(fn:Function)
+### TweeningCounter#onEnd(fn:Function)
 
-Set the function to execute on completion.
+Add an `end` event handler.
 
 ```js
-tweeningCounter.onComplete(function(){})
+tweeningCounter.onEnd(function(){})
 ```
 
 ### TweeningCounter#start

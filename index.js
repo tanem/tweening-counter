@@ -23,17 +23,21 @@ function TweeningCounter(el){
   this.el = el;
   this.interpolate = bind(this, 'interpolate');
   this.update = bind(this, 'update');
+  this.cancelAnimationFrame = bind(this, 'cancelAnimationFrame');
   this.tween = Tween({ val: 0 })
     .ease('out-cube')
     .to({ val: 0 })
     .update(this.update)
-    .duration(1000);
+    .duration(1000)
+    .on('end', this.cancelAnimationFrame);
 }
 
 /**
  * Set the value to tween to.
  *
- *     tweeningCounter.to(50)
+ * ```js
+ * tweeningCounter.to(50)
+ * ```
  *
  * @param {Number} val
  * @return {TweeningCounter} self
@@ -48,8 +52,10 @@ TweeningCounter.prototype.to = function(val){
 /**
  * Set the easing function.
  *
- *     tweeningCounter.ease('in-out-sine')
- *     tweeningCounter.ease(function(){})
+ * ```js
+ * tweeningCounter.ease('in-out-sine')
+ * tweeningCounter.ease(function(){})
+ * ```
  *
  * @param {String|Function} fn
  * @return {TweeningCounter} self
@@ -65,7 +71,9 @@ TweeningCounter.prototype.ease = function(fn){
 /**
  * Set the easing duration.
  *
- *     tweeningCounter.duration(1000);
+ * ```js
+ * tweeningCounter.duration(1000);
+ * ```
  *
  * @param {Number} ms
  * @return {TweeningCounter} self
@@ -78,24 +86,28 @@ TweeningCounter.prototype.duration = function(ms){
 };
 
 /**
- * Set the function to execute on completion.
+ * Add an `end` event handler.
  *
- *     tweeningCounter.onComplete(function(){})
+ * ```js
+ * tweeningCounter.onEnd(function(){})
+ * ```
  *
  * @param {Function} fn
  * @return {TweeningCounter} self
  * @api public
  */
 
-TweeningCounter.prototype.onComplete = function(fn){
-  if (isfunction(fn)) this.tween.once('end', fn);
+TweeningCounter.prototype.onEnd = function(fn){
+  if (isfunction(fn)) this.tween.on('end', fn);
   return this;
 };
 
 /**
  * Start the counter.
  *
- *     tweeningCounter.start()
+ * ```js
+ * tweeningCounter.start()
+ * ```
  *
  * @api public
  */
@@ -111,7 +123,7 @@ TweeningCounter.prototype.start = function(){
  */
 
 TweeningCounter.prototype.interpolate = function(){
-  raf(this.interpolate);
+  this.id = raf(this.interpolate);
   this.tween.update();
 };
 
@@ -124,4 +136,14 @@ TweeningCounter.prototype.interpolate = function(){
 
 TweeningCounter.prototype.update = function(obj){
   this.el.textContent = Math.round(obj.val);
+};
+
+/**
+ * Cancels the last request animation frame.
+ *
+ * @api private
+ */
+
+TweeningCounter.prototype.cancelAnimationFrame = function(){
+  raf.cancel(this.rafId);
 };

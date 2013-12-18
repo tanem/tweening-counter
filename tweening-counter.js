@@ -649,6 +649,8 @@ function clone(obj) {
 });
 require.register("component-ease/index.js", function(exports, require, module){
 
+// easing functions from "Tween.js"
+
 exports.linear = function(n){
   return n;
 };
@@ -787,6 +789,34 @@ exports.inOutBounce = function(n){
   return exports.outBounce(n * 2 - 1) * .5 + .5;
 };
 
+exports.inElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  return - ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );
+};
+
+exports.outElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  return ( a * Math.pow( 2, - 10 * n) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) + 1 );
+};
+
+exports.inOutElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  if ( ( n *= 2 ) < 1 ) return - 0.5 * ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );
+  return a * Math.pow( 2, -10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) * 0.5 + 1;
+};
+
 // aliases
 
 exports['in-quad'] = exports.inQuad;
@@ -816,6 +846,9 @@ exports['in-out-back'] = exports.inOutBack;
 exports['in-bounce'] = exports.inBounce;
 exports['out-bounce'] = exports.outBounce;
 exports['in-out-bounce'] = exports.inOutBounce;
+exports['in-elastic'] = exports.inElastic;
+exports['out-elastic'] = exports.outElastic;
+exports['in-out-elastic'] = exports.inOutElastic;
 
 });
 require.register("tweening-counter/index.js", function(exports, require, module){
@@ -844,17 +877,21 @@ function TweeningCounter(el){
   this.el = el;
   this.interpolate = bind(this, 'interpolate');
   this.update = bind(this, 'update');
+  this.cancelAnimationFrame = bind(this, 'cancelAnimationFrame');
   this.tween = Tween({ val: 0 })
     .ease('out-cube')
     .to({ val: 0 })
     .update(this.update)
-    .duration(1000);
+    .duration(1000)
+    .on('end', this.cancelAnimationFrame);
 }
 
 /**
  * Set the value to tween to.
  *
- *     tweeningCounter.to(50)
+ * ```js
+ * tweeningCounter.to(50)
+ * ```
  *
  * @param {Number} val
  * @return {TweeningCounter} self
@@ -869,8 +906,10 @@ TweeningCounter.prototype.to = function(val){
 /**
  * Set the easing function.
  *
- *     tweeningCounter.ease('in-out-sine')
- *     tweeningCounter.ease(function(){})
+ * ```js
+ * tweeningCounter.ease('in-out-sine')
+ * tweeningCounter.ease(function(){})
+ * ```
  *
  * @param {String|Function} fn
  * @return {TweeningCounter} self
@@ -886,7 +925,9 @@ TweeningCounter.prototype.ease = function(fn){
 /**
  * Set the easing duration.
  *
- *     tweeningCounter.duration(1000);
+ * ```js
+ * tweeningCounter.duration(1000);
+ * ```
  *
  * @param {Number} ms
  * @return {TweeningCounter} self
@@ -899,24 +940,28 @@ TweeningCounter.prototype.duration = function(ms){
 };
 
 /**
- * Set the function to execute on completion.
+ * Add an `end` event handler.
  *
- *     tweeningCounter.onComplete(function(){})
+ * ```js
+ * tweeningCounter.onEnd(function(){})
+ * ```
  *
  * @param {Function} fn
  * @return {TweeningCounter} self
  * @api public
  */
 
-TweeningCounter.prototype.onComplete = function(fn){
-  if (isfunction(fn)) this.tween.once('end', fn);
+TweeningCounter.prototype.onEnd = function(fn){
+  if (isfunction(fn)) this.tween.on('end', fn);
   return this;
 };
 
 /**
  * Start the counter.
  *
- *     tweeningCounter.start()
+ * ```js
+ * tweeningCounter.start()
+ * ```
  *
  * @api public
  */
@@ -932,7 +977,7 @@ TweeningCounter.prototype.start = function(){
  */
 
 TweeningCounter.prototype.interpolate = function(){
-  raf(this.interpolate);
+  this.id = raf(this.interpolate);
   this.tween.update();
 };
 
@@ -945,6 +990,16 @@ TweeningCounter.prototype.interpolate = function(){
 
 TweeningCounter.prototype.update = function(obj){
   this.el.textContent = Math.round(obj.val);
+};
+
+/**
+ * Cancels the last request animation frame.
+ *
+ * @api private
+ */
+
+TweeningCounter.prototype.cancelAnimationFrame = function(){
+  raf.cancel(this.rafId);
 };
 });
 

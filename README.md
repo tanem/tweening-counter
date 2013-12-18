@@ -1,6 +1,6 @@
 # tweening-counter
 
-A JavaScript counter that uses a timing function to move towards it's destination.
+A counter that uses a timing function to move towards it's destination.
 
 ## Installation
 

@@ -2,6 +2,12 @@
 
 A counter that uses a timing function to move towards it's destination.
 
+## Dependencies
+
+```
+npm install -g uglify-js mocha-phantomjs phantomjs component
+```
+
 ## Installation
 
 Install with [component(1)](http://component.io):

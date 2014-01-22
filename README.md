@@ -2,15 +2,13 @@
 
 A counter that uses a timing function to move towards it's destination.
 
-## Dependencies
+## Live Demo
 
-```
-npm install -g uglify-js mocha-phantomjs phantomjs component
-```
+[Check out the live demo on CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.
 
 ## Installation
 
-Install with [component(1)](http://component.io):
+Ensure [component(1)](http://component.io) is installed, then:
 
 ```sh
 $ component install tanem/tweening-counter
@@ -18,16 +16,21 @@ $ component install tanem/tweening-counter
 
 ## Stand-alone
 
-This library may be used stand-alone without the component tool, simply add ./tweening-counter.js to your application and reference the `TweeningCounter` global. With all its dependencies tweening-counter is the following size:
+This library may be used stand-alone without the component tool. To build the stand-alone files, ensure [UglifyJS2](https://github.com/mishoo/UglifyJS2) is installed, then: 
 
+```sh
+$ make tweening-counter.min.js
 ```
-24K tweening-counter.js
-16K tweening-counter.min.js
+
+Then add ./tweening-counter.js to your application and reference the `TweeningCounter` global.
+
+## Unit Tests
+
+To run the unit tests, ensure [mocha-phantomjs](https://github.com/metaskills/mocha-phantomjs) is installed. Then:
+
+```sh
+$ make test
 ```
-
-## Live Demo
-
-[Check out the live demo on CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.
 
 ## API
 

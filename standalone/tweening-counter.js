@@ -649,6 +649,8 @@ function clone(obj) {
 });
 require.register("component-ease/index.js", function(exports, require, module){
 
+// easing functions from "Tween.js"
+
 exports.linear = function(n){
   return n;
 };
@@ -787,6 +789,34 @@ exports.inOutBounce = function(n){
   return exports.outBounce(n * 2 - 1) * .5 + .5;
 };
 
+exports.inElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  return - ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );
+};
+
+exports.outElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  return ( a * Math.pow( 2, - 10 * n) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) + 1 );
+};
+
+exports.inOutElastic = function(n){
+  var s, a = 0.1, p = 0.4;
+  if ( n === 0 ) return 0;
+  if ( n === 1 ) return 1;
+  if ( !a || a < 1 ) { a = 1; s = p / 4; }
+  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+  if ( ( n *= 2 ) < 1 ) return - 0.5 * ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );
+  return a * Math.pow( 2, -10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) * 0.5 + 1;
+};
+
 // aliases
 
 exports['in-quad'] = exports.inQuad;
@@ -816,6 +846,98 @@ exports['in-out-back'] = exports.inOutBack;
 exports['in-bounce'] = exports.inBounce;
 exports['out-bounce'] = exports.outBounce;
 exports['in-out-bounce'] = exports.inOutBounce;
+exports['in-elastic'] = exports.inElastic;
+exports['out-elastic'] = exports.outElastic;
+exports['in-out-elastic'] = exports.inOutElastic;
+
+});
+require.register("component-domify/index.js", function(exports, require, module){
+
+/**
+ * Expose `parse`.
+ */
+
+module.exports = parse;
+
+/**
+ * Wrap map from jquery.
+ */
+
+var map = {
+  legend: [1, '<fieldset>', '</fieldset>'],
+  tr: [2, '<table><tbody>', '</tbody></table>'],
+  col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
+  _default: [0, '', '']
+};
+
+map.td =
+map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
+
+map.option =
+map.optgroup = [1, '<select multiple="multiple">', '</select>'];
+
+map.thead =
+map.tbody =
+map.colgroup =
+map.caption =
+map.tfoot = [1, '<table>', '</table>'];
+
+map.text =
+map.circle =
+map.ellipse =
+map.line =
+map.path =
+map.polygon =
+map.polyline =
+map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
+
+/**
+ * Parse `html` and return the children.
+ *
+ * @param {String} html
+ * @return {Array}
+ * @api private
+ */
+
+function parse(html) {
+  if ('string' != typeof html) throw new TypeError('String expected');
+
+  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
+
+  // tag name
+  var m = /<([\w:]+)/.exec(html);
+  if (!m) return document.createTextNode(html);
+  var tag = m[1];
+
+  // body support
+  if (tag == 'body') {
+    var el = document.createElement('html');
+    el.innerHTML = html;
+    return el.removeChild(el.lastChild);
+  }
+
+  // wrap map
+  var wrap = map[tag] || map._default;
+  var depth = wrap[0];
+  var prefix = wrap[1];
+  var suffix = wrap[2];
+  var el = document.createElement('div');
+  el.innerHTML = prefix + html + suffix;
+  while (depth--) el = el.lastChild;
+
+  // one element
+  if (el.firstChild == el.lastChild) {
+    return el.removeChild(el.firstChild);
+  }
+
+  // several elements
+  var fragment = document.createDocumentFragment();
+  while (el.firstChild) {
+    fragment.appendChild(el.removeChild(el.firstChild));
+  }
+
+  return fragment;
+}
 
 });
 require.register("tweening-counter/index.js", function(exports, require, module){
@@ -825,6 +947,8 @@ var raf = require('raf');
 var Tween = require('tween');
 var bind = require('bind');
 var isfunction = require('isfunction');
+var template = require('./template');
+var domify = require('domify');
 
 /**
  * Expose `TweeningCounter`.
@@ -833,15 +957,13 @@ var isfunction = require('isfunction');
 module.exports = TweeningCounter;
 
 /**
- * Initialize a new `TweeningCounter` with the given `el`.
+ * Initialize a new `TweeningCounter`.
  *
- * @param {Element} el
  * @api public
  */
 
-function TweeningCounter(el){
-  if (!el) throw new Error('el is required');
-  this.el = el;
+function TweeningCounter(){
+  this.el = domify(template);
   this.interpolate = bind(this, 'interpolate');
   this.update = bind(this, 'update');
   this.cancelAnimationFrame = bind(this, 'cancelAnimationFrame');
@@ -969,6 +1091,11 @@ TweeningCounter.prototype.cancelAnimationFrame = function(){
   raf.cancel(this.rafId);
 };
 });
+require.register("tweening-counter/template.js", function(exports, require, module){
+module.exports = '<div class="tweening-counter"></div>';
+});
+
+
 
 
 
@@ -1002,6 +1129,9 @@ require.alias("component-ease/index.js", "component-tween/deps/ease/index.js");
 
 require.alias("component-ease/index.js", "tweening-counter/deps/ease/index.js");
 require.alias("component-ease/index.js", "ease/index.js");
+
+require.alias("component-domify/index.js", "tweening-counter/deps/domify/index.js");
+require.alias("component-domify/index.js", "domify/index.js");
 
 require.alias("tweening-counter/index.js", "tweening-counter/index.js");if (typeof exports == "object") {
   module.exports = require("tweening-counter");

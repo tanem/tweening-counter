@@ -4,6 +4,8 @@ var raf = require('raf');
 var Tween = require('tween');
 var bind = require('bind');
 var isfunction = require('isfunction');
+var template = require('./template');
+var domify = require('domify');
 
 /**
  * Expose `TweeningCounter`.
@@ -12,15 +14,13 @@ var isfunction = require('isfunction');
 module.exports = TweeningCounter;
 
 /**
- * Initialize a new `TweeningCounter` with the given `el`.
+ * Initialize a new `TweeningCounter`.
  *
- * @param {Element} el
  * @api public
  */
 
-function TweeningCounter(el){
-  if (!el) throw new Error('el is required');
-  this.el = el;
+function TweeningCounter(){
+  this.el = domify(template);
   this.interpolate = bind(this, 'interpolate');
   this.update = bind(this, 'update');
   this.cancelAnimationFrame = bind(this, 'cancelAnimationFrame');

@@ -9,14 +9,8 @@ describe('Tweening counter', function(){
     log;
 
   beforeEach(function(){
-    tweeningCounter = new TweeningCounter(document.createElement('div'));
+    tweeningCounter = new TweeningCounter();
     log = {};
-  });
-
-  it('should throw an error if an element is not provided on initialisation', function(){
-    expect(function(){
-      new TweeningCounter();
-    }).to.throwError(/el is required/);
   });
 
   it('should allow setting of the to value', function(){

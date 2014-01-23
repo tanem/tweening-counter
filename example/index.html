@@ -23,7 +23,6 @@
   </style>
 </head>
 <body>
-  <div class="tweening-counter"></div>
   <script src="../build/build.js"></script>
   <script>
   (function(){
@@ -33,9 +32,8 @@
     var random = require('random');
     var TweeningCounter = require('tweening-counter');
 
-    var tweeningCounter = new TweeningCounter(document.querySelector('.tweening-counter'))
-      .duration(3000)
-      .onEnd(loop);
+    var tweeningCounter = new TweeningCounter().duration(3000).onEnd(loop);
+    document.body.appendChild(tweeningCounter.el);
 
     // Run the tweening counter towards a random int between 0 and 50,
     // with a delay of between 0.5s and 2s between each run.

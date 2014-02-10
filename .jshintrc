@@ -10,7 +10,6 @@
     "it": false,
     "describe": false,
     "beforeEach": false,
-    "expect": true,
-    "spooks": false
+    "expect": true
   }
 }

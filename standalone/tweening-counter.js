@@ -901,12 +901,13 @@ map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'
 
 function parse(html) {
   if ('string' != typeof html) throw new TypeError('String expected');
-
-  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
-
+  
   // tag name
   var m = /<([\w:]+)/.exec(html);
   if (!m) return document.createTextNode(html);
+
+  html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
+
   var tag = m[1];
 
   // body support
@@ -1136,7 +1137,7 @@ require.alias("component-domify/index.js", "domify/index.js");
 require.alias("tweening-counter/index.js", "tweening-counter/index.js");if (typeof exports == "object") {
   module.exports = require("tweening-counter");
 } else if (typeof define == "function" && define.amd) {
-  define(function(){ return require("tweening-counter"); });
+  define([], function(){ return require("tweening-counter"); });
 } else {
   this["TweeningCounter"] = require("tweening-counter");
 }})();

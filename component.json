@@ -2,7 +2,7 @@
   "name": "tweening-counter",
   "repo": "tanem/tweening-counter",
   "description": "A counter that uses a timing function to move towards it's destination.",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "keywords": [
     "tweening",
     "counter"
@@ -20,7 +20,8 @@
     "danzajdband/random": "*",
     "techjacker/expect.js": "*",
     "philbooth/spooks.js": "*",
-    "visionmedia/mocha": "*"
+    "visionmedia/mocha": "*",
+    "ianstormtaylor/sinon": "*"
   },
   "license": "MIT",
   "main": "index.js",

@@ -1,63 +1,52 @@
+'use strict';
+
 var raf = require('raf');
+var expect = require('expect.js');
+var sinon = require('sinon');
 var TweeningCounter = require('tweening-counter');
 
 describe('Tweening counter', function(){
 
-  'use strict';
-
-  var tweeningCounter,
-    log;
+  var tweeningCounter;
 
   beforeEach(function(){
     tweeningCounter = new TweeningCounter();
-    log = {};
   });
 
   it('should allow setting of the to value', function(){
-    tweeningCounter.tween.to = spooks.fn({
-      name: 'to',
-      log: log
-    });
+    var toStub = sinon.stub(tweeningCounter.tween, 'to');
     tweeningCounter.to(100);
-    expect(log.args.to[0][0].val).to.be(100);
+    expect(toStub.args[0][0].val).to.be(100);
   });
 
   it('should allow setting of the ease function by name', function(){
-    tweeningCounter.tween.ease = spooks.fn({
-      name: 'ease',
-      log: log
-    });
+    var easeStub = sinon.stub(tweeningCounter.tween, 'ease');
     tweeningCounter.ease('out-cube');
-    expect(log.args.ease[0][0]).to.be('out-cube');
+    expect(easeStub.args[0][0]).to.be('out-cube');
   });
 
   it('should allow setting of the ease function directly', function(){
-    var fn = function(){};
-    tweeningCounter.tween.ease = spooks.fn({
-      name: 'ease',
-      log: log
-    });
+    var fn = sinon.stub();
+    var easeStub = sinon.stub(tweeningCounter.tween, 'ease');
+
     tweeningCounter.ease(fn);
-    expect(log.args.ease[0][0]).to.be(fn);
+    
+    expect(easeStub.args[0][0]).to.be(fn);
   });
 
   it('should allow setting of the duration', function(){
-    tweeningCounter.tween.duration = spooks.fn({
-      name: 'duration',
-      log: log
-    });
+    var durationStub = sinon.stub(tweeningCounter.tween, 'duration');
     tweeningCounter.duration(2000);
-    expect(log.args.duration[0][0]).to.be(2000);
+    expect(durationStub.args[0][0]).to.be(2000);
   });
 
   it('should allow addition of an onEnd callback', function(){
-    var spy = spooks.fn({
-      name: 'spy',
-      log: log
-    });
-    tweeningCounter.onEnd(spy);
+    var fn = sinon.stub();
+    tweeningCounter.onEnd(fn);
+
     tweeningCounter.tween.emit('end');
-    expect(log.counts.spy).to.be(1);
+
+    expect(fn.callCount).to.be(1);
   });
 
   it('should update the el text on tween update', function(){
@@ -66,14 +55,13 @@ describe('Tweening counter', function(){
   });
 
   it('should cancel the latest raf callback on end', function(){
-    raf.cancel = spooks.fn({
-      name: 'cancel',
-      log: log
-    });
+    raf.cancel = sinon.stub();
     // Set a fake rafId.
     tweeningCounter.rafId = 1;
+
     tweeningCounter.tween.emit('end');
-    expect(log.args.cancel[0][0]).to.be(1);
+    
+    expect(raf.cancel.args[0][0]).to.be(1);
   });
 
 });

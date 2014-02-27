@@ -2,6 +2,8 @@
 
 A counter that uses a timing function to move towards it's destination.
 
+[![browser support](https://ci.testling.com/tanem/tweening-counter.png)](https://ci.testling.com/tanem/tweening-counter)
+
 ## Live Demo
 
 [Check out the live demo on CodePen](http://codepen.io/tanem/pen/AaxDd), which uses the stand-alone file.

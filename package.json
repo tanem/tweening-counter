@@ -15,6 +15,9 @@
       "opera/latest"
     ],
     "preprocess": "make build",
-    "scripts": ["build/*.js", "test/*.js"]
+    "scripts": [
+      "build/*.js",
+      "test/*.js"
+    ]
   }
 }

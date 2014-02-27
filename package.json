@@ -1,0 +1,20 @@
+{
+  "name": "tweening-counter",
+  "description": "A counter that uses a timing function to move towards it's destination.",
+  "devDependencies": {
+    "mocha": "*",
+    "component": "*"
+  },
+  "testling": {
+    "harness": "mocha",
+    "browsers": [
+      "ie/latest",
+      "chrome/latest",
+      "firefox/latest",
+      "safari/latest",
+      "opera/latest"
+    ],
+    "preprocess": "make build",
+    "scripts": ["build/*.js", "test/*.js"]
+  }
+}

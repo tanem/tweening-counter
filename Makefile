@@ -13,7 +13,7 @@ clean:
 	rm -fr build components $(STANDALONE_DIR)
 
 test: build
-	@mocha-phantomjs -R dot test/index.html
+	@testling
 
 tweening-counter.js: build
 	@component build --standalone TweeningCounter --out $(STANDALONE_DIR) --name tweening-counter

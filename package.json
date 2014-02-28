@@ -1,6 +1,10 @@
 {
   "name": "tweening-counter",
   "description": "A counter that uses a timing function to move towards it's destination.",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/tanem/tweening-counter.git"
+  },
   "devDependencies": {
     "mocha": "*"
   },

@@ -17,8 +17,8 @@
       "android-browser/latest"
     ],
     "scripts": [
-      "build/*.js",
-      "test/*.js"
+      "build/build.js",
+      "test/tweening-counter.spec.js"
     ]
   }
 }

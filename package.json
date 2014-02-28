@@ -12,7 +12,10 @@
       "chrome/latest",
       "firefox/latest",
       "safari/latest",
-      "opera/latest"
+      "opera/latest",
+      "iphone/latest",
+      "ipad/latest",
+      "android-browser/latest"
     ],
     "preprocess": "make build",
     "scripts": [

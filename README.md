@@ -28,7 +28,7 @@ Then add ./tweening-counter.js to your application and reference the `TweeningCo
 
 ## Unit Tests
 
-To run the unit tests, ensure [mocha-phantomjs](https://github.com/metaskills/mocha-phantomjs) is installed. Then:
+To run the unit tests, ensure [testling](https://github.com/substack/testling) is installed. Then:
 
 ```sh
 $ make test

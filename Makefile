@@ -13,6 +13,7 @@ clean:
 	rm -fr build components $(STANDALONE_DIR)
 
 test: build
+	@npm install
 	@testling
 
 tweening-counter.js: build

@@ -2,8 +2,7 @@
   "name": "tweening-counter",
   "description": "A counter that uses a timing function to move towards it's destination.",
   "devDependencies": {
-    "mocha": "*",
-    "component": "*"
+    "mocha": "*"
   },
   "testling": {
     "harness": "mocha",
@@ -17,7 +16,6 @@
       "ipad/latest",
       "android-browser/latest"
     ],
-    "preprocess": "make build",
     "scripts": [
       "build/*.js",
       "test/*.js"

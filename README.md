@@ -21,7 +21,7 @@ $ component install tanem/tweening-counter
 This library may be used stand-alone without the component tool. To build the stand-alone files, ensure [UglifyJS2](https://github.com/mishoo/UglifyJS2) is installed, then: 
 
 ```sh
-$ make tweening-counter.min.js
+$ make standalone
 ```
 
 Then add ./tweening-counter.js to your application and reference the `TweeningCounter` global.

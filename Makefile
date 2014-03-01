@@ -16,10 +16,8 @@ test: build
 	@npm install
 	@testling
 
-tweening-counter.js: build
+standalone: build
 	@component build --standalone TweeningCounter --out $(STANDALONE_DIR) --name tweening-counter
-
-tweening-counter.min.js: tweening-counter.js
-	@uglifyjs $(STANDALONE_DIR)/$< > $(STANDALONE_DIR)/$@
+	@uglifyjs $(STANDALONE_DIR)/tweening-counter.js > $(STANDALONE_DIR)/tweening-counter.min.js
 
 .PHONY: clean test

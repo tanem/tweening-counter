@@ -648,8 +648,6 @@ function clone(obj) {\n\
 ));
 require.register("component-ease/index.js", Function("exports, require, module",
 "\n\
-// easing functions from \"Tween.js\"\n\
-\n\
 exports.linear = function(n){\n\
   return n;\n\
 };\n\
@@ -788,34 +786,6 @@ exports.inOutBounce = function(n){\n\
   return exports.outBounce(n * 2 - 1) * .5 + .5;\n\
 };\n\
 \n\
-exports.inElastic = function(n){\n\
-  var s, a = 0.1, p = 0.4;\n\
-  if ( n === 0 ) return 0;\n\
-  if ( n === 1 ) return 1;\n\
-  if ( !a || a < 1 ) { a = 1; s = p / 4; }\n\
-  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );\n\
-  return - ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );\n\
-};\n\
-\n\
-exports.outElastic = function(n){\n\
-  var s, a = 0.1, p = 0.4;\n\
-  if ( n === 0 ) return 0;\n\
-  if ( n === 1 ) return 1;\n\
-  if ( !a || a < 1 ) { a = 1; s = p / 4; }\n\
-  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );\n\
-  return ( a * Math.pow( 2, - 10 * n) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) + 1 );\n\
-};\n\
-\n\
-exports.inOutElastic = function(n){\n\
-  var s, a = 0.1, p = 0.4;\n\
-  if ( n === 0 ) return 0;\n\
-  if ( n === 1 ) return 1;\n\
-  if ( !a || a < 1 ) { a = 1; s = p / 4; }\n\
-  else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );\n\
-  if ( ( n *= 2 ) < 1 ) return - 0.5 * ( a * Math.pow( 2, 10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) );\n\
-  return a * Math.pow( 2, -10 * ( n -= 1 ) ) * Math.sin( ( n - s ) * ( 2 * Math.PI ) / p ) * 0.5 + 1;\n\
-};\n\
-\n\
 // aliases\n\
 \n\
 exports['in-quad'] = exports.inQuad;\n\
@@ -845,9 +815,6 @@ exports['in-out-back'] = exports.inOutBack;\n\
 exports['in-bounce'] = exports.inBounce;\n\
 exports['out-bounce'] = exports.outBounce;\n\
 exports['in-out-bounce'] = exports.inOutBounce;\n\
-exports['in-elastic'] = exports.inElastic;\n\
-exports['out-elastic'] = exports.outElastic;\n\
-exports['in-out-elastic'] = exports.inOutElastic;\n\
 //@ sourceURL=component-ease/index.js"
 ));
 require.register("component-domify/index.js", Function("exports, require, module",
@@ -12109,7 +12076,7 @@ var raf = require('raf');\n\
 var Tween = require('tween');\n\
 var bind = require('bind');\n\
 var isfunction = require('isfunction');\n\
-var template = require('./template');\n\
+var template = require('./template.html');\n\
 var domify = require('domify');\n\
 \n\
 /**\n\
@@ -12253,31 +12220,31 @@ TweeningCounter.prototype.cancelAnimationFrame = function(){\n\
   raf.cancel(this.rafId);\n\
 };//@ sourceURL=tweening-counter/index.js"
 ));
-require.register("tweening-counter/template.js", Function("exports, require, module",
-"module.exports = '<div class=\"tweening-counter\"></div>';//@ sourceURL=tweening-counter/template.js"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+require.register("tweening-counter/template.html", Function("exports, require, module",
+"module.exports = '<div class=\"tweening-counter\"></div>';//@ sourceURL=tweening-counter/template.html"
 ));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 require.alias("component-raf/index.js", "tweening-counter/deps/raf/index.js");
 require.alias("component-raf/index.js", "raf/index.js");
 

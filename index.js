@@ -4,7 +4,7 @@ var raf = require('raf');
 var Tween = require('tween');
 var bind = require('bind');
 var isfunction = require('isfunction');
-var template = require('./template');
+var template = require('./template.html');
 var domify = require('domify');
 
 /**

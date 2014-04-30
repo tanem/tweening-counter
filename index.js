@@ -24,6 +24,7 @@ function TweeningCounter(){
   this.interpolate = bind(this, 'interpolate');
   this.update = bind(this, 'update');
   this.cancelAnimationFrame = bind(this, 'cancelAnimationFrame');
+  this._fixed = 0;
   this.tween = Tween({ val: 0 })
     .ease('out-cube')
     .to({ val: 0 })
@@ -45,7 +46,7 @@ function TweeningCounter(){
  */
 
 TweeningCounter.prototype.to = function(val){
-  this.tween.to({ val: val });
+  this.tween.to({ val: +this.getAsFixed(val) });
   return this;
 };
 
@@ -103,6 +104,23 @@ TweeningCounter.prototype.onEnd = function(fn){
 };
 
 /**
+ * Specify the number of decimal places in the output.
+ *
+ * ```js
+ * tweeningCounter.fixed(2)
+ * ```
+ *
+ * @param {Number} fixed
+ * @return {TweeningCounter} self
+ * @api public
+ */
+
+TweeningCounter.prototype.fixed = function(fixed){
+  this._fixed = fixed;
+  return this;
+};
+
+/**
  * Start the counter.
  *
  * ```js
@@ -135,7 +153,7 @@ TweeningCounter.prototype.interpolate = function(){
  */
 
 TweeningCounter.prototype.update = function(obj){
-  this.el.textContent = Math.round(obj.val);
+  this.el.textContent = this.getAsFixed(obj.val);
 };
 
 /**
@@ -146,4 +164,18 @@ TweeningCounter.prototype.update = function(obj){
 
 TweeningCounter.prototype.cancelAnimationFrame = function(){
   raf.cancel(this.rafId);
+};
+
+/**
+ * Converts a number to a string with the specified fixed number
+ * of decimal places.
+ *
+ * @param {Number} val
+ * @return {String}
+ * @api private
+ */
+
+TweeningCounter.prototype.getAsFixed = function(val){
+  var mult = Math.pow(10, this._fixed);
+  return (Math.round(val * mult) / mult).toFixed(this._fixed);
 };

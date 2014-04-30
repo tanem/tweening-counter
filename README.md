@@ -73,6 +73,14 @@ Add an `end` event handler bound to this `TweeningCounter`.
 tweeningCounter.onEnd(function(){})
 ```
 
+### TweeningCounter#fixed(fixed:Number)
+
+Specify the number of decimal places in the output.
+ 
+```js
+tweeningCounter.fixed(2)
+```
+
 ### TweeningCounter#start
 
 Start the counter.

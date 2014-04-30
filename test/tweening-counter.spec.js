@@ -49,9 +49,15 @@ describe('Tweening counter', function(){
     expect(fn.callCount).to.be(1);
   });
 
-  it('should update the el text on tween update', function(){
-    tweeningCounter.update({ val: 2 });
-    expect(tweeningCounter.el.textContent).to.be('2');
+  it('should allow setting of the number of decimal places in the output', function(){
+    tweeningCounter.fixed(2);
+    expect(tweeningCounter._fixed).to.be(2);
+  });
+
+  it('should update the el text on tween update with the correct number of decimal places', function(){
+    tweeningCounter = new TweeningCounter().fixed(2);
+    tweeningCounter.update({ val: 2.759 });
+    expect(tweeningCounter.el.textContent).to.be('2.76');
   });
 
   it('should cancel the latest raf callback on end', function(){

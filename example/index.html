@@ -13,12 +13,12 @@
     height: 200px;
     left: 50%;
     line-height: 200px;
-    margin-left: -100px;
+    margin-left: -150px;
     margin-top: -100px;
     position: absolute;
     text-align: center;
     top: 50%;
-    width: 200px;
+    width: 300px;
   }
   </style>
 </head>
@@ -32,7 +32,7 @@
     var random = require('random');
     var TweeningCounter = require('tweening-counter');
 
-    var tweeningCounter = new TweeningCounter().duration(3000).onEnd(loop);
+    var tweeningCounter = new TweeningCounter().duration(3000).fixed(1).onEnd(loop);
     document.body.appendChild(tweeningCounter.el);
 
     // Run the tweening counter towards a random int between 0 and 50,

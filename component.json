@@ -2,7 +2,7 @@
   "name": "tweening-counter",
   "repository": "tanem/tweening-counter",
   "description": "A counter that uses a timing function to move towards it's destination.",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "keywords": [
     "tweening",
     "counter"

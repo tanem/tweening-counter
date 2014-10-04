@@ -1,3 +1,7 @@
+## v4.1.2 / 2014-10-05
+
+ * ([732eea1](https://github.com/tanem/tweening-counter/commit/732eea15d8be878052cf47448d658ceb9711b899)) Generate CHANGELOG with mkclog
+
 ## v4.1.1 / 2014-07-07
 
  * ([8bb76ab](https://github.com/tanem/tweening-counter/commit/8bb76ab238fe1833cc994eb473b55cd41efb195f)) Add license

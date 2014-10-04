@@ -5,6 +5,7 @@
     "type" : "git",
     "url" : "git://github.com/tanem/tweening-counter.git"
   },
+  "homepage": "https://github.com/tanem/tweening-counter",
   "devDependencies": {
     "mocha": "*"
   },

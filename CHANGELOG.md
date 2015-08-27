@@ -1,3 +1,8 @@
+## v4.1.3 / 2015-08-27
+
+ * ([36be951](https://github.com/tanem/tweening-counter/commit/36be951024f14b8b8f90fbff2c3ce73590509bac)) Update README
+ * ([1d2e90b](https://github.com/tanem/tweening-counter/commit/1d2e90bda3f6c4fa934453667d8c666b5bb7dd8f)) Update license info
+
 ## v4.1.2 / 2014-10-05
 
  * ([732eea1](https://github.com/tanem/tweening-counter/commit/732eea15d8be878052cf47448d658ceb9711b899)) Generate CHANGELOG with mkclog

@@ -12,7 +12,7 @@ A counter that uses a timing function to move towards it's destination.
 
 Ensure [component(1)](http://component.io) is installed, then:
 
-```sh
+```
 $ component install tanem/tweening-counter
 ```
 
@@ -20,7 +20,7 @@ $ component install tanem/tweening-counter
 
 This library may be used stand-alone without the component tool. To build the stand-alone files, ensure [UglifyJS2](https://github.com/mishoo/UglifyJS2) is installed, then: 
 
-```sh
+```
 $ make standalone
 ```
 
@@ -30,7 +30,7 @@ Then add ./tweening-counter.js to your application and reference the `TweeningCo
 
 To run the unit tests, ensure [testling](https://github.com/substack/testling) is installed. Then:
 
-```sh
+```
 $ make test
 ```
 

@@ -1,3 +1,7 @@
+## v4.1.4 / 2016-02-07
+
+ * ([7a34273](https://github.com/tanem/tweening-counter/commit/7a3427302229dfb75deb1f5e323736732c3a8703)) Update license (closes [#1](https://github.com/tanem/tweening-counter/issues/1))
+
 ## v4.1.3 / 2015-08-27
 
  * ([36be951](https://github.com/tanem/tweening-counter/commit/36be951024f14b8b8f90fbff2c3ce73590509bac)) Update README

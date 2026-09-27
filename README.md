@@ -1,5 +1,7 @@
 # tweening-counter
 
+> **Unmaintained.** This project is no longer maintained and the repository is archived.
+
 A counter that uses a timing function to move towards it's destination.
 
 [![browser support](https://ci.testling.com/tanem/tweening-counter.png)](https://ci.testling.com/tanem/tweening-counter)
